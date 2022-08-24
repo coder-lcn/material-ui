@@ -554,6 +554,10 @@ export default function useSlider(parameters: UseSliderParameters) {
   const createHandleMouseDown =
     (otherHandlers: Record<string, React.EventHandler<any>>) =>
     (event: React.MouseEvent<HTMLSpanElement>) => {
+      if ('ontouchstart' in window) {
+        event.preventDefault();
+      }
+      
       otherHandlers.onMouseDown?.(event);
       if (disabled) {
         return;
